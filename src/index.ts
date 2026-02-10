@@ -1,11 +1,15 @@
 import express from "express";
 import subjectsRouter from "./routes/subjects";
 import cors from "cors";
+import securityMiddleware from "./middleware/security";
 
 const app = express();
 const PORT = 8000;
 
 app.use(express.json());
+
+app.use(securityMiddleware); // Apply security middleware globally. Adjust as needed for specific routes.
+
 const frontendUrl = process.env.FRONTEND_URL;
 if (!frontendUrl) {
     throw new Error("FRONTEND_URL is not defined");
